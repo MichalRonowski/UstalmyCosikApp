@@ -17,8 +17,8 @@ export default defineConfig({
         name: 'Ustalmy Cosik App',
         short_name: 'UstalmyCosik',
         description: 'Progressive Web App with Firebase Firestore',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        theme_color: '#646cff',
+        background_color: '#1a1a1a',
         display: 'standalone',
         icons: [
           {
@@ -29,7 +29,8 @@ export default defineConfig({
           {
             src: '/pwa-512x512.png',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       }
