@@ -1,0 +1,190 @@
+.kto-co-ogarnia {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+.table-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid rgba(100, 108, 255, 0.5);
+  color: #646cff;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s;
+}
+
+tbody tr:hover:not(.editing) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr.editing {
+  background: rgba(100, 108, 255, 0.1);
+}
+
+tbody td {
+  padding: 1rem;
+}
+
+tbody td input {
+  width: 100%;
+  padding: 0.5em;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: inherit;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+tbody td input:focus {
+  outline: 2px solid #646cff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.empty {
+  color: #666;
+  font-style: italic;
+}
+
+.actions {
+  width: 120px;
+  text-align: right;
+}
+
+.actions button {
+  padding: 0.4em 0.8em;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.2s;
+}
+
+.edit-btn,
+.save-btn {
+  background: rgba(100, 108, 255, 0.2);
+  color: #646cff;
+}
+
+.edit-btn:hover,
+.save-btn:hover {
+  background: rgba(100, 108, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.delete-btn,
+.cancel-btn {
+  background: rgba(255, 100, 100, 0.2);
+  color: #ff6464;
+}
+
+.delete-btn:hover,
+.cancel-btn:hover {
+  background: rgba(255, 100, 100, 0.3);
+  transform: scale(1.05);
+}
+
+.add-row-button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1em;
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.add-row-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.add-row-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: light) {
+  .table-container {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  tbody tr:hover:not(.editing) {
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  tbody tr.editing {
+    background: rgba(100, 108, 255, 0.1);
+  }
+
+  tbody tr {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+
+  tbody td input {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  tbody td input:focus {
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .kto-co-ogarnia {
+    padding: 1rem;
+  }
+
+  .table-container {
+    padding: 1rem;
+  }
+
+  thead th,
+  tbody td {
+    padding: 0.5rem;
+    font-size: 0.9em;
+  }
+
+  .actions {
+    width: 80px;
+  }
+
+  .actions button {
+    padding: 0.3em 0.6em;
+    font-size: 0.9em;
+  }
+}

@@ -1,0 +1,46 @@
+.home-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.home-screen h1 {
+  font-size: 3.5em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-screen .subtitle {
+  color: #888;
+  margin-bottom: 3rem;
+  font-size: 1.2em;
+}
+
+.main-button {
+  padding: 1.5em 3em;
+  font-size: 1.3em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(100, 108, 255, 0.3);
+}
+
+.main-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(100, 108, 255, 0.5);
+}
+
+.main-button:active {
+  transform: translateY(0);
+}

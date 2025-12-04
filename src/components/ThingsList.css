@@ -1,0 +1,116 @@
+.things-list {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.things-list-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  padding: 0.5em 1em;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.things-list h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+.add-thing-button {
+  width: 100%;
+  padding: 1em 2em;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.add-thing-button:hover {
+  transform: translateY(-2px);
+}
+
+.loading,
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 3rem;
+  font-size: 1.1em;
+}
+
+.things-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.thing-card {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.thing-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #646cff;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(100, 108, 255, 0.2);
+}
+
+.thing-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3em;
+  color: #646cff;
+}
+
+.thing-type {
+  color: #888;
+  font-size: 0.9em;
+  margin: 0.5rem 0;
+}
+
+.thing-card small {
+  color: #666;
+  font-size: 0.85em;
+}
+
+@media (prefers-color-scheme: light) {
+  .thing-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .thing-card:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .back-button {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .back-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
