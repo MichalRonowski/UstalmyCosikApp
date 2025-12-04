@@ -2,6 +2,19 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { registerSW } from 'virtual:pwa-register'
+
+// Auto-reload when new version is available
+registerSW({
+  immediate: true,
+  onNeedRefresh() {
+    // Automatically reload when new version is detected
+    window.location.reload()
+  },
+  onOfflineReady() {
+    console.log('App is ready to work offline')
+  },
+})
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
