@@ -20,11 +20,29 @@ export default defineConfig({
         theme_color: '#646cff',
         background_color: '#1a1a1a',
         display: 'standalone',
+        start_url: '/',
+        scope: '/',
         icons: [
+          {
+            src: '/pwa-72x72.png',
+            sizes: '72x72',
+            type: 'image/png'
+          },
+          {
+            src: '/pwa-96x96.png',
+            sizes: '96x96',
+            type: 'image/png'
+          },
+          {
+            src: '/pwa-144x144.png',
+            sizes: '144x144',
+            type: 'image/png'
+          },
           {
             src: '/pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any'
           },
           {
             src: '/pwa-512x512.png',
