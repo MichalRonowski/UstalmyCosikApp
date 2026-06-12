@@ -12,16 +12,16 @@ interface UstalenieDatyProps {
 interface Availability {
   id: string
   name: string
-  selectedDays: number[] // day of month (1-31)
+  selectedDays: string[] // dates in YYYY-MM-DD format
 }
 
 function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
   const [availability, setAvailability] = useState<Availability[]>([])
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [personName, setPersonName] = useState('')
-  const [selectedDays, setSelectedDays] = useState<number[]>([])
+  const [selectedDays, setSelectedDays] = useState<string[]>([])
   const [editingPersonId, setEditingPersonId] = useState<string | null>(null)
-  const [matchingDays, setMatchingDays] = useState<number[]>([])
+  const [matchingDays, setMatchingDays] = useState<string[]>([])
 
   useEffect(() => {
     const docRef = doc(db, 'things-to-settle', thing.id)
@@ -45,13 +45,13 @@ function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
       return
     }
 
-    // Get all days from first person
-    const allDaysSet = new Set(availability[0].selectedDays)
+    // Get all dates from first person
+    const allDatesSet = new Set(availability[0].selectedDays)
 
-    // Keep only days that are in all people's availability
-    const matching = Array.from(allDaysSet).filter(day =>
-      availability.every(person => person.selectedDays.includes(day))
-    ).sort((a, b) => a - b)
+    // Keep only dates that are in all people's availability
+    const matching = Array.from(allDatesSet).filter(date =>
+      availability.every(person => person.selectedDays.includes(date))
+    ).sort()
 
     setMatchingDays(matching)
   }, [availability])
@@ -73,9 +73,14 @@ function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
     return `${months[date.getMonth()]} ${date.getFullYear()}`
   }
 
+  const formatDateToISO = (year: number, month: number, day: number) => {
+    return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+  }
+
   const handleDayClick = (day: number) => {
+    const dateISO = formatDateToISO(currentMonth.getFullYear(), currentMonth.getMonth(), day)
     setSelectedDays(prev =>
-      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
+      prev.includes(dateISO) ? prev.filter(d => d !== dateISO) : [...prev, dateISO]
     )
   }
 
@@ -92,16 +97,16 @@ function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
 
     const docRef = doc(db, 'things-to-settle', thing.id)
 
-    try {
-      if (editingPersonId) {
-        // Update existing person
-        const updatedAvailability = availability.map(person =>
-          person.id === editingPersonId
-            ? { ...person, name: personName, selectedDays: selectedDays.sort((a, b) => a - b) }
+    try {) }
             : person
         )
         await updateDoc(docRef, { availability: updatedAvailability })
       } else {
+        // Add new person
+        const newPerson: Availability = {
+          id: crypto.randomUUID(),
+          name: personName.trim(),
+          selectedDays: selectedDays.sort(
         // Add new person
         const newPerson: Availability = {
           id: crypto.randomUUID(),
@@ -192,10 +197,11 @@ function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
 
             <div className="calendar-grid">
               {calendarDays.map((day, index) => {
-                const isMatching = matchingDays.includes(day || 0)
-                const isSelected = selectedDays.includes(day || 0)
-                const isUsedByOthers = availability.some(
-                  person => person.id !== editingPersonId && person.selectedDays.includes(day || 0)
+                const dateISO = day ? formatDateToISO(currentMonth.getFullYear(), currentMonth.getMonth(), day) : ''
+                const isMatching = day && matchingDays.includes(dateISO)
+                const isSelected = day && selectedDays.includes(dateISO)
+                const isUsedByOthers = day && availability.some(
+                  person => person.id !== editingPersonId && person.selectedDays.includes(dateISO)
                 )
 
                 return (
@@ -240,6 +246,25 @@ function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
               className="name-input"
             />
             <p className="selected-count">Zaznaczone dni: {selectedDays.length}</p>
+            {selectedDays.length > 0 && (
+              <div className="selected-dates">
+                <p className="dates-label">Wybrane daty:</p>
+                <div className="dates-list">
+                  {selectedDays.map(date => (
+                    <span key={date} className="date-badge">
+                      {date}
+                      <button
+                        className="remove-date"
+                        onClick={() => setSelectedDays(prev => prev.filter(d => d !== date))}
+                        aria-label="Usuń datę"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="button-group">
               <button
                 className="add-button"
@@ -291,9 +316,9 @@ function UstalenieDaty({ thing, onBack }: UstalenieDatyProps) {
             <div className="matching-section">
               <h3>✓ Terminy dla wszystkich</h3>
               <div className="matching-days">
-                {matchingDays.map(day => (
-                  <span key={day} className="matching-day">
-                    {day}
+                {matchingDays.map(date => (
+                  <span key={date} className="matching-day">
+                    {date}
                   </span>
                 ))}
               </div>
