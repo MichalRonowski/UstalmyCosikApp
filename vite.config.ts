@@ -12,7 +12,7 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true
       },
-      includeAssets: ['favicon.ico'],
+      includeAssets: ['favicon.png', 'apple-touch-icon.png'],
       manifest: {
         name: 'Ustalmy Cosik App',
         short_name: 'UstalmyCosik',
@@ -24,28 +24,28 @@ export default defineConfig({
         scope: '/',
         icons: [
           {
-            src: '/pwa-72x72.png',
+            src: '/icon-72x72.png',
             sizes: '72x72',
             type: 'image/png'
           },
           {
-            src: '/pwa-96x96.png',
+            src: '/icon-96x96.png',
             sizes: '96x96',
             type: 'image/png'
           },
           {
-            src: '/pwa-144x144.png',
+            src: '/icon-144x144.png',
             sizes: '144x144',
             type: 'image/png'
           },
           {
-            src: '/pwa-192x192.png',
+            src: '/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any'
           },
           {
-            src: '/pwa-512x512.png',
+            src: '/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
