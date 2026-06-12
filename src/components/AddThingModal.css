@@ -64,6 +64,8 @@
 }
 
 .title-input {
+  box-sizing: border-box;
+  display: block;
   width: 100%;
   padding: 1em;
   margin-bottom: 1.5rem;
