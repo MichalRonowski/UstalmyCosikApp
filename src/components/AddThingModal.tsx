@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './AddThingModal.css'
 
 interface AddThingModalProps {
-  onAdd: (type: 'KtoCoOgarnia', title: string) => void
+  onAdd: (type: 'KtoCoOgarnia' | 'UstalenieDaty', title: string) => void
   onClose: () => void
 }
 
@@ -10,10 +10,10 @@ type Step = 'selectType' | 'enterTitle'
 
 function AddThingModal({ onAdd, onClose }: AddThingModalProps) {
   const [step, setStep] = useState<Step>('selectType')
-  const [selectedType, setSelectedType] = useState<'KtoCoOgarnia' | null>(null)
+  const [selectedType, setSelectedType] = useState<'KtoCoOgarnia' | 'UstalenieDaty' | null>(null)
   const [title, setTitle] = useState('')
 
-  const handleSelectType = (type: 'KtoCoOgarnia') => {
+  const handleSelectType = (type: 'KtoCoOgarnia' | 'UstalenieDaty') => {
     setSelectedType(type)
     setStep('enterTitle')
   }
@@ -38,6 +38,13 @@ function AddThingModal({ onAdd, onClose }: AddThingModalProps) {
               >
                 <h3>Kto co ogarnia</h3>
                 <p>Tabela podziału zadań i obowiązków</p>
+              </button>
+              <button
+                className="type-option"
+                onClick={() => handleSelectType('UstalenieDaty')}
+              >
+                <h3>Ustalenie daty spotkania</h3>
+                <p>Kalendarz dostępności i wspólne terminy</p>
               </button>
             </div>
             <button className="cancel-button" onClick={onClose}>

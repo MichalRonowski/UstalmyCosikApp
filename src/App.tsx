@@ -3,12 +3,13 @@ import './App.css'
 import HomeScreen from './components/HomeScreen'
 import ThingsList from './components/ThingsList'
 import KtoCoOgarnia from './components/KtoCoOgarnia'
+import UstalenieDaty from './components/UstalenieDaty'
 
 type View = 'home' | 'list' | 'detail'
 
 export interface ThingToSettle {
   id: string
-  type: 'KtoCoOgarnia'
+  type: 'KtoCoOgarnia' | 'UstalenieDaty'
   title: string
   createdAt: Date
 }
@@ -48,10 +49,17 @@ function App() {
       )}
       
       {currentView === 'detail' && selectedThing && (
-        <KtoCoOgarnia 
-          thing={selectedThing}
-          onBack={handleBackToList}
-        />
+        selectedThing.type === 'KtoCoOgarnia' ? (
+          <KtoCoOgarnia 
+            thing={selectedThing}
+            onBack={handleBackToList}
+          />
+        ) : selectedThing.type === 'UstalenieDaty' ? (
+          <UstalenieDaty 
+            thing={selectedThing}
+            onBack={handleBackToList}
+          />
+        ) : null
       )}
     </div>
   )

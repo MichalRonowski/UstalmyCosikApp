@@ -36,14 +36,21 @@ function ThingsList({ onSelectThing, onBack }: ThingsListProps) {
     return () => unsubscribe()
   }, [])
 
-  const handleAddThing = async (type: 'KtoCoOgarnia', title: string) => {
+  const handleAddThing = async (type: 'KtoCoOgarnia' | 'UstalenieDaty', title: string) => {
     try {
-      await addDoc(collection(db, 'things-to-settle'), {
+      const newThingData: any = {
         type,
         title,
         createdAt: Timestamp.now(),
-        rows: []
-      })
+      }
+      
+      if (type === 'KtoCoOgarnia') {
+        newThingData.rows = []
+      } else if (type === 'UstalenieDaty') {
+        newThingData.availability = []
+      }
+      
+      await addDoc(collection(db, 'things-to-settle'), newThingData)
       setShowAddModal(false)
     } catch (error) {
       console.error('Błąd dodawania rzeczy do ustalenia:', error)

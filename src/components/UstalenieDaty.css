@@ -1,0 +1,454 @@
+.ustalenie-daty {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #ffffff;
+}
+
+.ustalenie-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 2px solid #646cff;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ustalenie-header h1 {
+  margin: 0;
+  flex: 1;
+  font-size: 1.8rem;
+  color: #646cff;
+}
+
+.back-button {
+  background: rgba(100, 108, 255, 0.2);
+  color: #646cff;
+  border: 2px solid #646cff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #646cff;
+  color: #1a1a1a;
+  transform: translateX(-2px);
+}
+
+.ustalenie-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Calendar Section */
+.calendar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(100, 108, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+}
+
+.calendar-header h2 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  color: #646cff;
+  font-size: 1.3rem;
+}
+
+.calendar-header button {
+  background: #646cff;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.calendar-header button:hover {
+  background: #7a78ff;
+  transform: scale(1.05);
+}
+
+.calendar {
+  background: rgba(100, 108, 255, 0.05);
+  border: 2px solid rgba(100, 108, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: bold;
+  color: #646cff;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+  cursor: not-allowed;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.calendar-day.active {
+  cursor: pointer;
+  background: rgba(100, 108, 255, 0.1);
+  color: #ddd;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.calendar-day.active:hover {
+  background: rgba(100, 108, 255, 0.2);
+  border-color: #646cff;
+  transform: scale(1.05);
+}
+
+.calendar-day.selected {
+  background: #646cff;
+  color: white;
+  border: 2px solid #7a78ff;
+  font-weight: bold;
+}
+
+.calendar-day.matching {
+  background: linear-gradient(135deg, #646cff 0%, #7a78ff 100%);
+  color: white;
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgba(100, 108, 255, 0.6);
+  animation: pulse 2s infinite;
+}
+
+.calendar-day.used-by-others {
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px dashed rgba(100, 150, 200, 0.5);
+  color: #99ccff;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(100, 108, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(100, 108, 255, 0.8);
+  }
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: rgba(100, 108, 255, 0.05);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+}
+
+.legend-item .legend-color.selected {
+  background: #646cff;
+}
+
+.legend-item .legend-color.matching {
+  background: linear-gradient(135deg, #646cff 0%, #7a78ff 100%);
+  box-shadow: 0 0 8px rgba(100, 108, 255, 0.6);
+}
+
+.legend-item .legend-color.used-by-others {
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px dashed rgba(100, 150, 200, 0.5);
+}
+
+/* Availability Section */
+.availability-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-section,
+.people-section,
+.matching-section {
+  background: rgba(100, 108, 255, 0.05);
+  border: 2px solid rgba(100, 108, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.input-section h3,
+.people-section h3,
+.matching-section h3 {
+  margin-top: 0;
+  color: #646cff;
+  font-size: 1.1rem;
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #646cff;
+  background: rgba(100, 108, 255, 0.1);
+  box-shadow: 0 0 8px rgba(100, 108, 255, 0.3);
+}
+
+.selected-count {
+  margin: 0.5rem 0;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.add-button,
+.edit-button,
+.delete-button,
+.cancel-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.add-button {
+  background: #646cff;
+  color: white;
+}
+
+.add-button:hover:not(:disabled) {
+  background: #7a78ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.4);
+}
+
+.add-button:disabled {
+  background: rgba(100, 108, 255, 0.3);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cancel-button {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.cancel-button:hover {
+  background: rgba(255, 107, 107, 0.3);
+  border-color: #ff6b6b;
+}
+
+.edit-button {
+  background: rgba(100, 108, 255, 0.2);
+  color: #646cff;
+  border: 1px solid rgba(100, 108, 255, 0.3);
+  flex: 1;
+}
+
+.edit-button:hover {
+  background: rgba(100, 108, 255, 0.3);
+  border-color: #646cff;
+}
+
+.delete-button {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  flex: 1;
+}
+
+.delete-button:hover {
+  background: rgba(255, 107, 107, 0.3);
+  border-color: #ff6b6b;
+}
+
+.empty-message {
+  color: #aaa;
+  text-align: center;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+.people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.person-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(100, 108, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+
+.person-card h4 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.days-count {
+  margin: 0.25rem 0;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.days-list {
+  margin: 0.5rem 0;
+  color: #ddd;
+  font-size: 0.85rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.person-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.matching-section {
+  border-color: rgba(100, 200, 100, 0.3);
+  background: rgba(100, 200, 100, 0.05);
+}
+
+.matching-section h3 {
+  color: #6ec86e;
+}
+
+.matching-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.matching-day {
+  background: #6ec86e;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(110, 200, 110, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ustalenie-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .people-list {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ustalenie-header {
+    padding: 1rem;
+  }
+
+  .ustalenie-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .ustalenie-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .calendar-legend {
+    gap: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .add-button,
+  .edit-button,
+  .delete-button,
+  .cancel-button {
+    flex: auto;
+  }
+
+  .person-actions {
+    flex-direction: column;
+  }
+}
